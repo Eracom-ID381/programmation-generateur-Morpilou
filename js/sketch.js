@@ -8,6 +8,7 @@ let randomiser = {
 };
 let coneSize;
 var colors = ['343,58,85', '23,40,38', '61,16,100', '74,100,89', '44,90,90', '129,47,57'];
+var heights = ['0', '100', '200'];
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
@@ -18,6 +19,7 @@ function setup() {
 
 function draw() {
   let coneSize = random(50, 100);
+  let y = 0;
 
   // Conditionellle nous permettant de savoir si la souris est appuyée
   // et si le timer est écoulé
@@ -27,13 +29,14 @@ function draw() {
     let x = random(0, 10);
 
     if (x <= 5) {
-      draw_circle(width / 2, height / 2 - 200, random(100, 200));
-      draw_circle(width / 2, height / 2 - 100, random(100, 200));
-      draw_circle(width / 2, height / 2, random(100, 200));
+      for (var i = 0; i < random(0, 3); i = i + 1) {
+        draw_circle(width / 2, height / 2 - y, random(100, 200));
+        y = y + 100;
+      }
     } else {
-      draw_circle(width / 2, height / 2 - random(randomiser.min, randomiser.max), random(100, 200));
-      draw_circle(width / 2 - random(randomiser.min, randomiser.max), height / 2, random(100, 200));
-      draw_circle(width / 2 + random(randomiser.min, randomiser.max), height / 2, random(100, 200));
+      draw_circle(width / 2, height / 2 - random(randomiser.min, randomiser.max), random(150, 200));
+      draw_circle(width / 2 - random(randomiser.min, randomiser.max), height / 2, random(150, 200));
+      draw_circle(width / 2 + random(randomiser.min, randomiser.max), height / 2, random(150, 200));
     }
 
     // Appel de notre fonction generator
