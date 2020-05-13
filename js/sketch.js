@@ -6,7 +6,8 @@ let randomiser = {
   min: 50,
   max: 100
 };
-var colors = ['343,58,85', '23,40,38', '61,16,100'];
+let coneSize;
+var colors = ['343,58,85', '23,40,38', '61,16,100', '74,100,89', '44,90,90', '129,47,57'];
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
@@ -16,17 +17,30 @@ function setup() {
 }
 
 function draw() {
+  let coneSize = random(50, 100);
 
   // Conditionellle nous permettant de savoir si la souris est appuyée
   // et si le timer est écoulé
   if (frameCount % (timer * 60) == 0 && !mouseIsPressed) {
     clear();
-    // Appel de notre fonction generator
-    random_color(colors);
 
-    draw_circle(width / 2, height / 2 - random(randomiser.min, randomiser.max), random(100, 200));
-    draw_circle(width / 2 - random(randomiser.min, randomiser.max), height / 2, random(100, 200));
-    draw_circle(width / 2 + random(randomiser.min, randomiser.max), height / 2, random(100, 200));
+    let x = random(0, 10);
+
+    if (x <= 5) {
+      draw_circle(width / 2, height / 2 - 200, random(100, 200));
+      draw_circle(width / 2, height / 2 - 100, random(100, 200));
+      draw_circle(width / 2, height / 2, random(100, 200));
+    } else {
+      draw_circle(width / 2, height / 2 - random(randomiser.min, randomiser.max), random(100, 200));
+      draw_circle(width / 2 - random(randomiser.min, randomiser.max), height / 2, random(100, 200));
+      draw_circle(width / 2 + random(randomiser.min, randomiser.max), height / 2, random(100, 200));
+    }
+
+    // Appel de notre fonction generator
+
+    fill(44, 41, 87);
+    iceCone(width / 2 - coneSize, height / 2 + 50, width / 2 + coneSize, height / 2 + 50, width / 2, height / 2 + random(200, 400));
+
 
   }
 
@@ -37,6 +51,7 @@ function draw_circle(x, y, size) {
   random_color(colors);
   // fill utilise le paramètre de notre fonction
   circle(x, y, size);
+
 }
 
 function random_color(colors) {
@@ -44,6 +59,10 @@ function random_color(colors) {
   var thisColors = colors[rand];
   let splitColors = thisColors.split(",")
   fill(splitColors[0], splitColors[1], splitColors[2]);
+}
+
+function iceCone(x1, y1, x2, y2, x3, y3) {
+  triangle(x1, y1, x2, y2, x3, y3)
 }
 
 function mousePressed() {
